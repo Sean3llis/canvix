@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import firebase from './firebase';
+import Grid from './Grid';
+import Global from './Global';
 
 class App extends Component {
+  handleClick(e) {
+    e.preventDefault();
+    console.log('e ~~>', e);
+    const itemsRef = firebase.database().ref('items');
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <button onClick={this.handleClick}>Click Me!</button>
+        <Grid />
+        <Global />
       </div>
     );
   }
