@@ -2,19 +2,28 @@ import React, { Component } from 'react';
 import firebase from './firebase';
 import Grid from './Grid';
 import Global from './Global';
+import Palette from './Palette';
 
 class App extends Component {
   handleClick(e) {
     e.preventDefault();
     console.log('e ~~>', e);
-    const itemsRef = firebase.database().ref('items');
+  }
+
+  componentDidMount() {
+    const gridRef = firebase.database().ref('grid');
+    console.log('gridRef ~~>', gridRef);
+    gridRef.on('value', (snapshot) => {
+      console.log(snapshot.val());
+    });
   }
 
   render() {
     return (
       <div>
         <button onClick={this.handleClick}>Click Me!</button>
-        <Grid />
+        <Palette />
+        <Grid firebase={firebase} />
         <Global />
       </div>
     );
