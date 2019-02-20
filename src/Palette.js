@@ -11,6 +11,7 @@ export const COLORS = [
   '#AE46CA',
   '#7B8895',
   '#4E5C6A',
+  '#000000'
 ];
 
 const PaletteWrapper = styled.div`

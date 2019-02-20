@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import times from 'lodash/times';
 import styled from '@emotion/styled';
 import { Consumer } from './App';
@@ -17,13 +17,9 @@ const Row = styled.div`
   justify-content: center;
 `;
 
-export default class Grid extends Component {
+export default class Grid extends PureComponent {
   buildPixels(rowIndex) {
-    const pixels = times(GRID_FACTOR, columnIndex => {
-      const color = this.grid[`${rowIndex}-${columnIndex}`];
-      return <Pixel color={color} onClick={this.handlePixelClick.bind(this, rowIndex, columnIndex)} key={`${rowIndex}.${columnIndex}`} />
-    });
-    return <Row key={rowIndex}>{pixels}</Row>
+
   }
 
   buildGrid() {
@@ -33,10 +29,13 @@ export default class Grid extends Component {
   }
 
   _render(state) {
-    this.grid = state.grid;
-    console.log('_render state ~~>', state);
-    this.handlePixelClick = (r, c) => state.handlePixelClick(r, c)
-    return this.buildGrid()
+    return times(GRID_FACTOR, rowIndex => {
+      const pixels = times(GRID_FACTOR, columnIndex => {
+        const color = state.grid[`${rowIndex}-${columnIndex}`];
+        return <Pixel color={color} onClick={state.handlePixelClick.bind(this, rowIndex, columnIndex)} key={`${rowIndex}.${columnIndex}`} />
+      });
+      return <Row key={rowIndex}>{pixels}</Row>
+    })
   }
 
   render() {
