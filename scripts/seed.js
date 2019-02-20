@@ -1,6 +1,6 @@
 // var fs = require('fs');
 const fs = require('fs');
-const GRID_FACTOR = 10;
+const GRID_FACTOR = 100;
 const seedData = {};
 
 for (let i = 0; i < GRID_FACTOR; i++) {
